@@ -1,11 +1,19 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,6 +57,14 @@ public class Usuario implements Serializable {
     @NotNull(message = "A data de cadastro deve ser informada")
     @Column(name = "data_cadastro", nullable = false)
     private Calendar dataCadastro;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "permissoes", 
+            joinColumns = 
+                    @JoinColumn(name = "nome_usuario", referencedColumnName = "nome_usuario", 
+                            nullable = false), 
+            inverseJoinColumns = 
+                    @JoinColumn(name = "permissao", referencedColumnName = "nome", nullable = false))
+    private Set<Permissao> permissoes = new HashSet<>();
 
     public Usuario(){
         this.dataCadastro = Calendar.getInstance();
@@ -126,5 +142,15 @@ public class Usuario implements Serializable {
         }
         return true;
     }
+
+    public Set<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(Set<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
+
+
 
 }
