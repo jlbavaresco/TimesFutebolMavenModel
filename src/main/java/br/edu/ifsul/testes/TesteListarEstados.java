@@ -21,7 +21,11 @@ public class TesteListarEstados {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TimesFutebolMavenModelPU");
         EntityManager em = emf.createEntityManager();
-        List<Estado> lista = em.createQuery("from Estado order by id").getResultList();
+        List<Estado> lista = 
+                em.createQuery("from Estado order by id")
+                        .setMaxResults(30).
+                        setFirstResult(30).
+                        getResultList();
         for (Estado e : lista){
             System.out.println("ID: " + e.getId() + " Nome: " + e.getNome() + " UF: " + e.getUf());
         }
