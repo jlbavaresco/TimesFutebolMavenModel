@@ -67,5 +67,6 @@ public class Jogador extends Pessoa implements Serializable {
     public void setTime(Time time) {
         this.time = time;
     }
+    
 
 }

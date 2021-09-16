@@ -164,4 +164,9 @@ public class Time implements Serializable {
         this.jogadores = jogadores;
     }
 
+    @Override
+    public String toString() {
+        return  nome;
+    }
+
 }

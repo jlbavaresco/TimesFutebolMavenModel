@@ -151,6 +151,9 @@ public class Usuario implements Serializable {
         this.permissoes = permissoes;
     }
 
-
+   @Override
+    public String toString() {
+        return  nome;
+    }
 
 }
